@@ -22,6 +22,11 @@ def read_fauna_by_id(fauna_id: int, db: Session = Depends(database_service.get_d
 
 @router.post("/createFauna", response_model=schemas.Fauna)
 def create_fauna(fauna: schemas.FaunaCreate, db: Session = Depends(database_service.get_db)):
+    # Verificar si el POI existe
+    poi = crud.get_poi_by_id(db, fauna.poi_id)
+    if poi is None:
+        raise HTTPException(status_code=404, detail="No se encontro el Punto de interes con el id {}".format(fauna.poi_id))
+    
     return crud.create_fauna(db=db, fauna=fauna)
 
 @router.delete("/deleteFaunaById/{fauna_id}")

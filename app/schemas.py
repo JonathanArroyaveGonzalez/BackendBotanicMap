@@ -20,13 +20,14 @@ class POI(POIBase):
 class FloraBase(BaseModel):
     nombre_cientifico: str
     familia: str
+    poi_id: int
 
 class FloraCreate(FloraBase):
     pass
 
 class Flora(FloraBase):
     id: int
-    poi_id: int
+    
 
     class Config:
         from_attributes = True
@@ -35,13 +36,14 @@ class FaunaBase(BaseModel):
     especie: str
     nombre_comun: str
     habitat: str
+    poi_id: int
 
 class FaunaCreate(FaunaBase):
     pass
 
 class Fauna(FaunaBase):
     id: int
-    poi_id: int
+    
 
     class Config:
         from_attributes = True
