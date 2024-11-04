@@ -1,10 +1,10 @@
+import os
 from fastapi import FastAPI
-from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
-from .routers import poi, flora, fauna
-from .database import Base,engine
-from . import models
+from fastapi import status
+from app.routers import poi, flora, fauna
+from app.database import Base, engine
+from app import models
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -26,10 +26,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-Base.metadata.create_all(bind= engine)
 app.include_router(poi.router)
 app.include_router(flora.router)
 app.include_router(fauna.router)
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Marketplace API"}
 
 @app.get(
         "/healthCheck",
