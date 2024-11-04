@@ -9,6 +9,9 @@ El proyecto sigue el patrón de arquitectura Modelo-Vista-Controlador (MVC):
 - **Vistas (Views)**: En este caso, las vistas son los endpoints definidos en los routers. Los routers están ubicados en la carpeta [app/routers](app/routers).
 - **Controladores (Controllers)**: La lógica de negocio y las operaciones CRUD están definidas en el archivo [app/crud.py](app/crud.py).
 
+## Deploy
+[Backend BotanicMap](https://backendbotanicmap.onrender.com/docs)
+
 ## Endpoints
 
 ### Fauna
