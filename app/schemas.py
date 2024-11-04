@@ -15,7 +15,7 @@ class POI(POIBase):
     id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class FloraBase(BaseModel):
     nombre_cientifico: str
@@ -29,7 +29,7 @@ class Flora(FloraBase):
     poi_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class FaunaBase(BaseModel):
     especie: str
@@ -44,4 +44,4 @@ class Fauna(FaunaBase):
     poi_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
