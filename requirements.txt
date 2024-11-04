@@ -1,0 +1,7 @@
+fastapi[all]
+uvicorn[standard]
+sqlAlchemy[all]
+pyrebase4
+pytest
+python-dotenv
+coverage
