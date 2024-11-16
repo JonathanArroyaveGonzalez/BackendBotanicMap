@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import status
 from app.controllers import poi, flora, fauna
 from app.database import Base, engine
-from app import models
+from app.models import models
 
 models.Base.metadata.create_all(bind=engine)
 
