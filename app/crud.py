@@ -1,5 +1,7 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
+from . import  schemas
+from .models import models
+
 
 def get_pois(db: Session, skip: int = 0, limit: int = 10):
     return db.query(models.POI).offset(skip).limit(limit).all()
