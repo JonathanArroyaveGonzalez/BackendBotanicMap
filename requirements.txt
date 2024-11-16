@@ -5,3 +5,4 @@ pyrebase4
 pytest
 python-dotenv
 coverage
+pg8000==1.30.3

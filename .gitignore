@@ -82,3 +82,4 @@ dmypy.json
 # Local .env files
 .env.local
 .env.*.local
+variables.env
