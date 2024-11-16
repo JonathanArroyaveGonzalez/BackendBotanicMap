@@ -2,12 +2,18 @@ from sqlalchemy.orm import Session
 from ..database import SessionLocal
 
 class DatabaseService:
-    def __init__(self):
-        self.db = None
+    """
+    Clase para gestionar la interacción con la base de datos usando SQLAlchemy.
+    """
 
-    def get_db(self):
-        self.db = SessionLocal()
+    @staticmethod
+    def get_db():
+        """
+        Generador que proporciona una sesión de base de datos.
+        Esto asegura que la sesión se abra y cierre adecuadamente.
+        """
+        db = SessionLocal()
         try:
-            yield self.db
+            yield db
         finally:
-            self.db.close()
+            db.close()
