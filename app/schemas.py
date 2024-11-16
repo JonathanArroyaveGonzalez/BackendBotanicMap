@@ -4,7 +4,9 @@ from pydantic import BaseModel
 # Flora schemas
 class FloraBase(BaseModel):
     nombre_cientifico: str
+    nombre_comun: str
     familia: str
+    foto_url: str
     poi_id: int
 
 class FloraCreate(FloraBase):
@@ -18,9 +20,11 @@ class Flora(FloraBase):
 
 # Fauna schemas
 class FaunaBase(BaseModel):
-    especie: str
+    nombre_cientifico: str
     nombre_comun: str
+    especie: str
     habitat: str
+    foto_url: str
     poi_id: int
 
 class FaunaCreate(FaunaBase):
