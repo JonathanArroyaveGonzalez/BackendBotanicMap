@@ -9,3 +9,5 @@ python-dotenv
 coverage
 pg8000==1.30.3
 pytest-cov
+pyrebase4
+setuptools
