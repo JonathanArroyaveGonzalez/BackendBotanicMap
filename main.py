@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import status
-from app.controllers import poi, flora, fauna
+from app.controllers import poi, flora, fauna, image
 from app.database import Base, engine
 from app.models import models
 
@@ -29,6 +29,7 @@ app.add_middleware(
 app.include_router(poi.router)
 app.include_router(flora.router)
 app.include_router(fauna.router)
+app.include_router(image.router)
 
 @app.get("/")
 def read_root():
