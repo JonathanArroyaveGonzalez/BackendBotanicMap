@@ -4,7 +4,7 @@ from .. import crud, schemas
 from ..services.databaseService import DatabaseService
 
 
-router = APIRouter(prefix="/pio",tags=["Punto de Interes"])
+router = APIRouter(prefix="/poi",tags=["Punto de Interes"])
 
 database_service = DatabaseService()
 
