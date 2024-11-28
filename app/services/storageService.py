@@ -5,7 +5,7 @@ from fastapi import UploadFile, HTTPException
 import firebase_admin
 from firebase_admin import credentials, storage
 from google.cloud import storage as gcs
-from ..environment import env
+from ..environment import serviceAccountKey
 
 class FirebaseStorageService:
     def __init__(self):
@@ -15,7 +15,7 @@ class FirebaseStorageService:
         # Check if Firebase app is already initialized to prevent duplicate initialization
         if not firebase_admin._apps:
             firebase_admin.initialize_app(
-                credential=env.cred, 
+                credential=serviceAccountKey.cred, 
                 options={
                     'storageBucket': 'my-project-4848-1683442933444.firebasestorage.appspot.com'
                 }

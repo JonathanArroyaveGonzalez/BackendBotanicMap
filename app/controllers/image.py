@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File, UploadFile, Depends
-from ..environment import env  # Assuming this is where your credentials are stored
+from ..environment import serviceAccountKey
 from ..services.storageService import FirebaseStorageService
 
 # Create a router for image-related endpoints
