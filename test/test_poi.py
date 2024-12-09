@@ -80,7 +80,7 @@ class TestPOICrud:
         
         # Create POI
         logger.info(f"Creando POI con datos: {sample_poi_data}")
-        response = client.post("/pio/createPois", json=sample_poi_data)
+        response = client.post("/poi/createPois", json=sample_poi_data)
         assert response.status_code == 200, "Error al crear POI"
         created_poi = response.json()
         poi_id = created_poi["id"]
@@ -88,7 +88,7 @@ class TestPOICrud:
 
         # Verify POI was created correctly
         logger.info(f"Verificando POI creado con ID: {poi_id}")
-        response = client.get(f"/pio/getPoiById/{poi_id}")
+        response = client.get(f"/poi/getPoiById/{poi_id}")
         assert response.status_code == 200, "Error al obtener POI creado"
         retrieved_poi = response.json()
         
@@ -109,14 +109,14 @@ class TestPOICrud:
         
         # Get all POIs
         logger.info("Obteniendo todos los POIs (límite 10)")
-        response = client.get("/pio/getAllPois?skip=0&limit=10")
+        response = client.get("/poi/getAllPois?skip=0&limit=10")
         assert response.status_code == 200, "Error al obtener todos los POIs"
         pois = response.json()
         logger.info(f"Se obtuvieron {len(pois)} POIs")
         
         # Test pagination
         logger.info("Probando paginación (límite 5)")
-        response = client.get("/pio/getAllPois?skip=0&limit=5")
+        response = client.get("/poi/getAllPois?skip=0&limit=5")
         assert response.status_code == 200, "Error al obtener POIs paginados"
         pois_paginated = response.json()
         logger.info(f"Se obtuvieron {len(pois_paginated)} POIs en la página")
@@ -134,19 +134,19 @@ class TestPOICrud:
         
         # Test with non-existent POI
         logger.info("Probando búsqueda de POI no existente")
-        response = client.get("/pio/getPoiById/999999")
+        response = client.get("/poi/getPoiById/999999")
         assert response.status_code == 404, "Se esperaba error 404 para POI no existente"
         assert response.json()["detail"] == "POI not found"
         logger.info("✓ Manejo correcto de POI no existente")
 
         # Test with existing POI
         logger.info("Probando búsqueda de POI existente")
-        response = client.get("/pio/getAllPois?limit=1")
+        response = client.get("/poi/getAllPois?limit=1")
         pois = response.json()
         if pois:
             poi_id = pois[0]["id"]
             logger.info(f"Buscando POI con ID: {poi_id}")
-            response = client.get(f"/pio/getPoiById/{poi_id}")
+            response = client.get(f"/poi/getPoiById/{poi_id}")
             assert response.status_code == 200, "Error al obtener POI existente"
             poi_data = response.json()
             logger.info(f"POI encontrado: {poi_data['nombre']}")
@@ -165,7 +165,7 @@ class TestPOICrud:
             "nombre": "POI Incompleto"
         }
         logger.info(f"Intentando crear POI con datos inválidos: {invalid_data}")
-        response = client.post("/pio/createPois", json=invalid_data)
+        response = client.post("/poi/createPois", json=invalid_data)
         assert response.status_code == 422, "Se esperaba error 422 para datos inválidos"
         logger.info("✓ Validación correcta de datos inválidos")
         
@@ -181,21 +181,21 @@ class TestPOICrud:
         
         # Create a POI to delete
         logger.info("Creando POI para eliminar")
-        response = client.post("/pio/createPois", json=sample_poi_data)
+        response = client.post("/poi/createPois", json=sample_poi_data)
         assert response.status_code == 200, "Error al crear POI para eliminar"
         poi_id = response.json()["id"]
         logger.info(f"POI creado con ID: {poi_id}")
 
         # Delete the POI
         logger.info(f"Eliminando POI con ID: {poi_id}")
-        response = client.delete(f"/pio/deletePoisById/{poi_id}")
+        response = client.delete(f"/poi/deletePoisById/{poi_id}")
         assert response.status_code == 200, "Error al eliminar POI"
         assert response.json()["message"] == "POI deleted"
         logger.info("POI eliminado exitosamente")
 
         # Verify POI was deleted
         logger.info("Verificando que el POI fue eliminado")
-        response = client.get(f"/pio/getPoiById/{poi_id}")
+        response = client.get(f"/poi/getPoiById/{poi_id}")
         assert response.status_code == 404, "El POI no fue eliminado correctamente"
         logger.info("✓ Se confirmó que el POI fue eliminado")
 
