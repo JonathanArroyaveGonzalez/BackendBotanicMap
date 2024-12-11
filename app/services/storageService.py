@@ -23,6 +23,22 @@ class FirebaseStorageService:
         self.bucket_name = 'my-project-4848-1683442933444.firebasestorage.app'
         # Get the default bucket correctly
         self.bucket = storage.bucket(self.bucket_name)
+        self.configure_cors()
+
+    def configure_cors(self):
+        """
+        Configure CORS for Firebase Storage bucket
+        """
+        cors_configuration = [{
+            "origin": ["*"],
+            "responseHeader": ["Content-Type"],
+            "method": ["GET", "HEAD", "PUT", "POST", "DELETE"],
+            "maxAgeSeconds": 3600
+        }]
+        
+        # Set the CORS configuration on the bucket
+        self.bucket.cors = cors_configuration
+        self.bucket.patch()
 
     async def upload_image(self, file: UploadFile) -> str:
         """
